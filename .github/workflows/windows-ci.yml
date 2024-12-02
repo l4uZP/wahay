@@ -1,0 +1,48 @@
+name: Wahay Windows CI
+
+on: [push]
+
+jobs:
+  test-windows:
+      runs-on: windows-2022
+
+      defaults:
+        run:
+          shell: msys2 {0}
+
+      strategy:
+        fail-fast: false
+
+      name: Test go-1.19 (Windows)
+      steps:
+        - name: checkout
+          uses: actions/checkout@v3
+        - uses: actions/setup-go@v3
+          with:
+            go-version: 1.19
+        - name: setup msys2
+          uses: msys2/setup-msys2@v2
+          with:
+            msystem: MINGW64
+            update: true
+            path-type: inherit
+            install: make git
+        - name: update msys2
+          run: pacman --noconfirm --needed -Syuu
+          continue-on-error: true
+        - name: update msys2 again
+          run: pacman --noconfirm --needed -Syuu
+          continue-on-error: true
+        - name: install dependencies
+          run: >
+            pacman --noconfirm --needed -Sy
+            pkg-config  
+            mingw-w64-x86_64-gcc 
+            mingw-w64-x86_64-gtk3 
+            mingw-w64-x86_64-glib2 
+            mingw-w64-x86_64-go
+        - name: run tests
+          run: >
+            make test 
+
+            
