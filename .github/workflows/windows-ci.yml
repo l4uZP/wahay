@@ -43,7 +43,7 @@ jobs:
             mingw-w64-x86_64-go
         - name: run tests
           run: >
-            make deps-ci
+            make deps
             make test 
 
             
