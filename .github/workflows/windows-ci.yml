@@ -36,13 +36,9 @@ jobs:
         - name: install dependencies
           run: >
             pacman --noconfirm --needed -Sy
-            pkg-config  
-            mingw-w64-x86_64-gcc 
-            mingw-w64-x86_64-gtk3 
-            mingw-w64-x86_64-glib2 
-            mingw-w64-x86_64-go
-        - name: run tests
-          run: >
-            make test 
+            mingw-w64-x86_64-pkg-config
+        - name: run stuff
+          run: make deps-ci
+        - run: make test 
 
             
