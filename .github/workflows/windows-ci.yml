@@ -38,6 +38,7 @@ jobs:
             pacman --noconfirm --needed -Sy
             mingw-w64-x86_64-pkg-config
             mingw-w64-x86_64-glib2
+            mingw-w64-x86_64-gtk3
         - name: run stuff
           run: make deps-ci
         - run: make test 
