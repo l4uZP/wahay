@@ -64,7 +64,7 @@ func getConfigFileFor(fileName, extension string) string {
 	if e != nil {
 		panic(fmt.Sprintf("Developer error: %v", e))
 	}
-	return string(content)
+	return strings.ReplaceAll(string(content), "\r\n", "\n")
 }
 
 func getCSSFileWithFallback(fileName string) string {
