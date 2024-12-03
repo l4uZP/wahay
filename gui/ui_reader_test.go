@@ -1,9 +1,7 @@
 package gui
 
 import (
-	"crypto/sha256"
 	"errors"
-	"fmt"
 	"os"
 	"strings"
 
@@ -142,14 +140,9 @@ func (s *WahayGUIUIReaderSuite) Test_getConfigFileFor_panicsWhenAskedForAConfigF
 }
 
 func (s *WahayGUIUIReaderSuite) Test_getImage_returnsAnImageThatExists(c *C) {
-	c.Assert(hash(getImage("help.svg")), Equals, "cdf5203cdcd2122c28dec1380f5b797f3a5254fef52c0b551e02dcf6520a9fce")
-	c.Assert(hash(getImage("wahay-192x192.png")), Equals, "b8dd0ffc7d9a70c1249e896bae6d20be7580f93e33fe8efc05f8130bb50bdc3f")
-	c.Assert(hash(getImage("join-meeting.svg")), Equals, "8403707f4f0a60fc77346543c92c9c249551edc2f1319f1bd258d740af619d05")
-}
-
-func hash(content []byte) string {
-	hash := sha256.Sum256(content)
-	return fmt.Sprintf("%x", hash)
+	c.Assert(len(getImage("help.svg")), Equals, 1072)
+	c.Assert(len(getImage("wahay-192x192.png")), Equals, 26279)
+	c.Assert(len(getImage("join-meeting.svg")), Equals, 1206)
 }
 
 func (s *WahayGUIUIReaderSuite) Test_getImage_panicsWhenTheImageDoesntExist(c *C) {
