@@ -1,6 +1,7 @@
 package client
 
 import (
+	"fmt"
 	"os"
 	"path/filepath"
 
@@ -20,6 +21,7 @@ func (s *clientSuite) Test_readerMumbleDB_returnsTheByteRepresentationFromAStrin
 func (s *clientSuite) Test_readerMumbleIniConfig_returnsTheContentLikeAString(c *C) {
 	result := readerMumbleIniConfig()
 
+	fmt.Println(len(result))
 	c.Assert(result, HasLen, 491)
 	c.Assert(result, Contains, "version=1.3.0")
 	c.Assert(result, Contains, "#CERTIFICATE")
