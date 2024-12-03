@@ -3,6 +3,7 @@ package client
 import (
 	_ "embed"
 	"os"
+	"strings"
 )
 
 //go:embed files/.mumble.sqlite
@@ -16,7 +17,7 @@ func readerMumbleDB() []byte {
 var mumbleIniContent string
 
 func readerMumbleIniConfig() string {
-	return mumbleIniContent
+	return strings.ReplaceAll(mumbleIniContent, "\r\n", "\n")
 }
 
 //go:embed files/mumble_settings.json
