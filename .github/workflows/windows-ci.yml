@@ -26,10 +26,7 @@ jobs:
             msystem: MINGW64
             update: true
             path-type: inherit
-            install: make git
-        - name: update msys2
-          run: pacman --noconfirm --needed -Syuu
-          continue-on-error: true
+            install: make
         - name: update msys2 again
           run: pacman --noconfirm --needed -Syuu
           continue-on-error: true
@@ -39,8 +36,7 @@ jobs:
             mingw-w64-x86_64-pkg-config
             mingw-w64-x86_64-glib2
             mingw-w64-x86_64-gtk3
-        - name: run stuff
-          run: make deps-ci
+        - run: make deps-ci
         - run: make test 
 
             
